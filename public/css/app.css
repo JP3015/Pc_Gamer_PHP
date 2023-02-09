@@ -59,9 +59,26 @@ select{
     border-radius: 10px;
 }
 .sub-title{
-    margin-top: 30px;
+    margin: 30px;
     text-align: center;
 }
+
+.get-content{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.get-topic{
+    padding-left: 50px;
+    font-size: 20px;
+}
+
+.get-text{
+    padding-left: 50px;
+}
+
 label{
     margin-top: 20px;
 }
