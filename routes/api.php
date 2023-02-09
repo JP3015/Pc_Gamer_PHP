@@ -13,7 +13,7 @@ Route::get('pc', [PcGamerController::class,'index']);
 
 Route::get('pc/{id}', [PcGamerController::class,'show']);
 
-Route::post('pc', [PcGamerController::class,'store']);
+Route::post('pc', [PcGamerController::class,'store'])->name('pc_gamer.store');
 
 Route::put('pc/{id}', [PcGamerController::class,'update']);
 

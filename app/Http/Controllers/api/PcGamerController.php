@@ -21,7 +21,7 @@ class PcGamerController extends Controller
             'preco' => 'required',
             'foto' => 'required',
         ]);
-        return pc_gamer::create($request->all());
+        pc_gamer::create($request->all());
     }
 
     public function show($id)

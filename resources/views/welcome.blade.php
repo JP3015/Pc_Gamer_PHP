@@ -12,29 +12,31 @@
     </header>
     <body>
         <div>
-            <div class="post-content">
-                <label><b>Tipo:</b></label>
-                <select>
-                    <option value="placaVideo">Placa de vídeo</option>
-                    <option value="processador">Processador</option>
-                    <option value="placaMae">Placa mãe</option>
-                    <option value="fonte">Fonte</option>
-                </select>
-                <label><b>Modelo:</b></label>
-                <input type="text" placeholder="digite aqui" class="content-input"/>
-                <label><b>Preço:</b></label>
-                <input type="number" placeholder="digite aqui" class="content-input"/>
-                <label><b>Foto:</b></label>
-                <form>
-                    <input type="file" id="input_imagem">
+            <div>
+                <form class="post-content" action="{{ route('pc_gamer.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <label><b>Tipo:</b></label>
+                    <select name="tipo">
+                        <option value="placaVideo">Placa de vídeo</option>
+                        <option value="processador">Processador</option>
+                        <option value="placaMae">Placa mãe</option>
+                        <option value="fonte">Fonte</option>
+                    </select>
+                    <label><b>Modelo:</b></label>
+                    <input type="text" name="modelo" placeholder="digite aqui" class="content-input"/>
+                    <label><b>Preço:</b></label>
+                    <input type="number" name="preco" placeholder="digite aqui" class="content-input"/>
+                    <label><b>Foto:</b></label>
+                    <input type="file" id="input_imagem" name="foto">
+                    <br>
+                    <div id="exibir_imagem"></div>
+                    <br>
+                    <button class="submit-btn">Enviar</button>
                 </form>
-                <br>
-                <div id="exibir_imagem"></div>
-                <br>
-                <button class="submit-btn">Enviar</button>
             </div>
+            <h2 class="sub-title"><b>Cadastrados:</b></h2>
             <div class="get-content">
-                <h2><b>Cadastrados:</b></h2>
+                
             </div>
         </div>
     </body>

@@ -58,7 +58,7 @@ select{
     transition: .2s;
     border-radius: 10px;
 }
-.get-content{
+.sub-title{
     margin-top: 30px;
     text-align: center;
 }
