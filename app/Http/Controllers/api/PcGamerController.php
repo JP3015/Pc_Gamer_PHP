@@ -27,7 +27,7 @@ class PcGamerController extends Controller
         pc_gamer::create([
             'tipo' => $request->tipo,
             'modelo' => $request->modelo,
-            'preco' => $request->preco,
+            'preco' => str_replace(['.', ','], ['', '.'], $request->input('preco')),
             'foto' => $request->foto ? $filename: '0.png',
         ]);
         
@@ -44,7 +44,9 @@ class PcGamerController extends Controller
         $pcGamer = pc_gamer::find($id);
         $pcGamer->tipo = $request->input('tipo');
         $pcGamer->modelo = $request->input('modelo');
-        $pcGamer->preco = $request->input('preco');
+        $pcGamer->preco = str_replace('.','',$request->input('preco'));
+        $pcGamer->preco = str_replace(',','.',$pcGamer->preco);
+        
 
         if($request->hasFile('foto')) 
         {

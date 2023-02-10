@@ -19,21 +19,21 @@
                     @method('PUT')
                     <label><b>Tipo:</b></label>
                     <select name="tipo">
-                        <option value="placaVideo" @if($pcGamer->tipo == 'placaVideo') selected @endif>Placa de vídeo</option>
-                        <option value="processador" @if($pcGamer->tipo == 'processador') selected @endif>Processador</option>
-                        <option value="placaMae" @if($pcGamer->tipo == 'placaMae') selected @endif>Placa mãe</option>
-                        <option value="fonte" @if($pcGamer->tipo == 'fonte') selected @endif>Fonte</option>
+                        <option value="Placa de Video" @if($pcGamer->tipo == 'placaVideo') selected @endif>Placa de vídeo</option>
+                        <option value="Processador" @if($pcGamer->tipo == 'processador') selected @endif>Processador</option>
+                        <option value="Placa Mae" @if($pcGamer->tipo == 'placaMae') selected @endif>Placa mãe</option>
+                        <option value="Fonte" @if($pcGamer->tipo == 'fonte') selected @endif>Fonte</option>
                     </select>
                     <label><b>Modelo:</b></label>
                     <input type="text" name="modelo" placeholder="digite aqui" value="{{ $pcGamer->modelo }}" class="content-input"/>
                     <label><b>Preço:</b></label>
-                    <input type="number" name="preco" placeholder="digite aqui" value="{{ $pcGamer->preco }}" class="content-input"/>
+                    <input type="text" id="preco" name="preco" placeholder="digite aqui" value="{{ $pcGamer->preco }}" class="content-input"/>
                     <label><b>Foto:</b></label>
                     <input type="file" id="input_imagem" name="foto"/>
                     <br>
                     <div id="exibir_imagem"><img src="{{ asset('/storage/images/' . $pcGamer->foto) }}"  width="200" height="200"></div>
                     <br>
-                    <button class="submit-btn">Atualizar</button>
+                    <button id="botao" class="submit-btn">Atualizar</button>
                 </form>
             </div>
         </div>
@@ -52,4 +52,42 @@
             reader.readAsDataURL(this.files[0]);
         });
     });
+    
+    var removePrefixButton = document.getElementById('botao');
+
+    var preco = document.getElementById('preco');
+
+    preco.addEventListener('input', function(e)
+    {
+        preco.value = formatRupiah(this.value, 'R$ ');
+    });
+
+    removePrefixButton.addEventListener('click', function(e) {
+        preco.value = removePrefix(preco.value, 'R$ ');
+    });
+
+    function formatRupiah(angka, prefix)
+    {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+            
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+        
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'R$ ' + rupiah : '');
+    }
+    
+    function removePrefix(value, prefix) {
+        return value.replace(prefix, '');
+    }
+
+    var format = preco.value;
+    preco.value = formatRupiah(format.replace('R$ ', ''), 'R$ ');
+
 </script>
